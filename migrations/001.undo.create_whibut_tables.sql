@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS whibut_users, whibut_books, whibut_movies, whibut_tv, whibut_restaurants;
