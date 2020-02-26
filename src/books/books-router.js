@@ -13,7 +13,7 @@ const serializeBook = book => ({
   author: xss(book.author), 
   genre: xss(book.genre),
   rating: book.rating,
-  comments: book.comments
+  comments: xss(book.comments)
 })
 
 booksRouter 
