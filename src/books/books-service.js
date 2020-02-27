@@ -4,6 +4,17 @@ const BooksService = {
       .select('*')
       .from('whibut_books')
       .where('user_id', userId) //returns only the books the user requested wrote...?.where('user_id', userId)
+  },
+
+  addBook(knex, newBook) {
+    return knex
+      .insert(newBook)
+      .into('whibut_books')
+      .returning('*')
+      .then(rows => {
+        return rows[0]
+      })
+
   }
 }
 

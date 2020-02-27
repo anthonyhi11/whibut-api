@@ -9,8 +9,8 @@ const serializeRestaurant = restaurant => ({
   id: restaurant.id,
   user_id: restaurant.user_id ,
   activity: xss(restaurant.activity),
-  name: xss(restaurant.name), 
-  type: xss(restaurant.type),
+  restaurant_name: xss(restaurant.restaurant_name), 
+  restaurant_type: xss(restaurant.restaurant_type),
   rating: restaurant.rating,
   website: xss(restaurant.website),
   comments: xss(restaurant.comments)
