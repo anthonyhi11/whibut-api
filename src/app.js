@@ -9,6 +9,7 @@ const moviesRouter = require('./movies/movies-router');
 const tvRouter = require('./tv/tv-router');
 const restaurantsRouter = require('./restaurants/restaurants-router');
 const usersRouter = require('./users/users-router');
+const loginRouter = require('./login/login-router');
 const app = express();
 
 
@@ -28,7 +29,8 @@ const morganOption = (NODE_ENV === 'production')
   app.use('/api/movies', moviesRouter);
   app.use('/api/tv', tvRouter);
   app.use('/api/restaurants', restaurantsRouter);
-  app.use('/api/users', usersRouter)
+  app.use('/api/users', usersRouter);
+  app.use('/api/login', loginRouter);
 
   app.get('/', (req, res) => {
     res.send('Hello, world!')

@@ -4,6 +4,8 @@ const usersRouter = express.Router();
 const jsonBodyParser = express.json();
 const UsersService = require('./users-service');
 
+//handles signup and adding user to database. need to add patch user to this
+
 usersRouter
   .route('/')
   .post(jsonBodyParser, (req, res, next) => {
