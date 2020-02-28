@@ -21,17 +21,17 @@ TRUNCATE
   INSERT INTO whibut_movies (user_id, activity, title, genre, rating, comments)
     VALUES 
       (1, 'movies', 'Parasite', 'Thriller', 10, 'Wonderful film. Had us questioning the disparity between classes. Subtitled and so suspenseful'),
-      (1, 'movies', 'Ad Astra', 'Sci-Fi', 6, 'Started out with an interesting world in the future with an A-List leading man. The movie fizzled with bad character writing');
+      (2, 'movies', 'Ad Astra', 'Sci-Fi', 6, 'Started out with an interesting world in the future with an A-List leading man. The movie fizzled with bad character writing');
 
 
   INSERT INTO whibut_tv (user_id, activity, title, network, genre, rating, comments)
     VALUES 
       (1, 'tv', 'The Outsider', 'HBO', 'Horror', 8, 'Stephen King keeps trying to keep me scared. A mix of crime and supernatural keeps you on your feet and checking your locks before bed.'),
-      (1, 'tv', 'The Bachelor', 'ABC', 'Reality', 5, 'Only worth watching for a few episodes as the show drags on and barely kept afloat by the meddlesome producers');
+      (2, 'tv', 'The Bachelor', 'ABC', 'Reality', 5, 'Only worth watching for a few episodes as the show drags on and barely kept afloat by the meddlesome producers');
 
   
   INSERT INTO whibut_restaurants (user_id, activity, restaurant_name, restaurant_type, website, rating, comments) 
     VALUES 
-      (1, 'restaurants', 'Popeyes', 'Fast Food', 'N/A', 7, 'Can be a bit pricey, but definitely one of the better options when it comes to fast chicken');
+      (2, 'restaurants', 'Popeyes', 'Fast Food', 'N/A', 7, 'Can be a bit pricey, but definitely one of the better options when it comes to fast chicken');
 
       COMMIT;
