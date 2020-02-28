@@ -57,5 +57,39 @@ booksRouter
     })
     .catch(next)
   })
+  
+  booksRouter
+    .route('/:bookId') 
+    //verify jwt token and that book exists
+    .all(requireAuth, (req, res, next) => {
+      BooksService.getById( 
+        req.app.get('db'),
+        req.params.bookId,
+        req.user.id)
+        .then(book => {
+          if (!book) {
+            return res.status(404).json({
+              error: `Can't find book`
+            })
+          } 
+          res.book = book;
+          next();       
+        })
+    })
+    .get((req, res, next) => {
+      res
+        .status(200)
+        .json(serializeBook(res.book))
+    })
+    .delete((req, res, next) => {
+      BooksService.deleteBook(
+        req.app.get('db'),
+        req.params.bookId,
+      )
+      .then(numRowsAffected => {
+        res.status(204).end();
+      })
+      .catch(next)
+    })
 
   module.exports = booksRouter;

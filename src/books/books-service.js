@@ -14,7 +14,19 @@ const BooksService = {
       .then(rows => {
         return rows[0]
       })
-
+  },
+  getById(knex, bookId, userId) {
+    return knex
+      .select('*')
+      .from('whibut_books')
+      .where('user_id', userId)
+      .where('id', bookId)
+      .first()
+  },
+  deleteBook(knex, id) {
+    return knex('whibut_books')
+      .where({ id })
+      .delete();
   }
 }
 
