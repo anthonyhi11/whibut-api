@@ -43,6 +43,21 @@ const UsersService = {
       username: xss(user.username),
       date_created: new Date(user.date_created)
     }
+  }, 
+  getById(knex, userId, id) {
+    return knex
+      .select('*')
+      .from('whibut_users')
+      .where('id', id)
+      .where('id', userId)
+      .first()
+  },
+  updateUser(knex, id, updatedUser) {
+    return knex('whibut_users')
+      .where({ id })
+      .update(updatedUser)
+      .returning('*')
+      .then(([user]) => user)
   }
 }
 
