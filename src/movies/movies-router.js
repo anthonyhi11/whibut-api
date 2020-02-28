@@ -1,6 +1,7 @@
 const express = require('express');
 const MoviesService = require('./movies-service');
 const xss = require('xss');
+const { requireAuth } = require('../jwt-auth/jwt-auth');
 
 const moviesRouter = express.Router();
 const jsonParser = express.json();
@@ -17,10 +18,10 @@ const serializeMovie = movie => ({
 
 moviesRouter 
   .route('/')
-  .get((req, res, next) => {
+  .get(requireAuth, (req, res, next) => {
     MoviesService.getAllMovies(
       req.app.get('db'),
-      1
+      req.user.id
     )
       .then(movies => {
         res.json(movies.map(serializeMovie))

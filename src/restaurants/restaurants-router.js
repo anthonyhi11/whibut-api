@@ -1,6 +1,7 @@
 const express = require('express');
 const RestaurantsService = require('./restaurants-service');
 const xss = require('xss');
+const { requireAuth } = require('../jwt-auth/jwt-auth');
 
 const restaurantsRouter = express.Router();
 const jsonParser = express.json();
@@ -18,10 +19,10 @@ const serializeRestaurant = restaurant => ({
 
 restaurantsRouter 
   .route('/')
-  .get((req, res, next) => {
+  .get(requireAuth, (req, res, next) => {
     RestaurantsService.getAllRestaurants(
       req.app.get('db'),
-      1
+      req.user.id
     )
       .then(restaurants => {
         res.json(restaurants.map(serializeRestaurant))

@@ -1,6 +1,7 @@
 const express = require('express');
 const TvService = require('./tv-service');
 const xss = require('xss');
+const { requireAuth } = require('../jwt-auth/jwt-auth');
 
 const tvRouter = express.Router();
 const jsonParser = express.json();
@@ -21,7 +22,7 @@ tvRouter
   .get((req, res, next) => {
     TvService.getAllTv(
       req.app.get('db'),
-      1
+      req.user.id
     )
       .then(show => {
         res.json(show.map(serializeTv))

@@ -10,12 +10,13 @@ TRUNCATE
 
   INSERT INTO whibut_users (username, password) 
     VALUES
-      ('anthonyhill', 'averylongpassword123');
+      ('anthonyhill', '$2b$10$U/LnH9uknjCST5M81BgYZOq5.ukvTN6TtrOnkPwNRIEO2QK7XrQsO'),
+      ('anthonyhill2', '$2a$12$CRTGcNoU2UEuam7GnBq8nOj9pPPaFSPY/j8MwjWSrS74D8g7e6d3S');
 
   INSERT INTO whibut_books (user_id, activity, title, author, genre, rating, comments)
     VALUES
       (1, 'books', 'Call of the Wild', 'Jack London', 'Adventure', 8, 'Read this when I was younger. Really enjoyed the rugged setting of the wild west in a time where bad men could get away and a dog could win'),
-      (1, 'books', 'Beyond the Sea of Ice', 'William Sarabande', 'Historical Fiction', 7, 'Ive been looking for a historical fiction set in prehistoric times when men had yet to find America. This book follows Torka, a young hunter and his band as they weather the long, brutal winters and murderous bands they encounter on their search for better hunting grounds and survival');
+      (2, 'books', 'Beyond the Sea of Ice', 'William Sarabande', 'Historical Fiction', 7, 'Ive been looking for a historical fiction set in prehistoric times when men had yet to find America. This book follows Torka, a young hunter and his band as they weather the long, brutal winters and murderous bands they encounter on their search for better hunting grounds and survival');
 
   INSERT INTO whibut_movies (user_id, activity, title, genre, rating, comments)
     VALUES 

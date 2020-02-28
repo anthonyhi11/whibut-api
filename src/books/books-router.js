@@ -1,6 +1,7 @@
 const express = require('express');
 const BooksService = require('./books-service');
 const xss = require('xss');
+const { requireAuth } = require('../jwt-auth/jwt-auth')
 
 const booksRouter = express.Router();
 const jsonParser = express.json();
@@ -18,10 +19,10 @@ const serializeBook = book => ({
 
 booksRouter 
   .route('/')
-  .get((req, res, next) => {
+  .get(requireAuth, (req, res, next) => {
     BooksService.getAllBooks(
       req.app.get('db'),
-      1
+      req.user.id
     )
       .then(books => {
         res.json(books.map(serializeBook))
