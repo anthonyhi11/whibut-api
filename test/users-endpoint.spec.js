@@ -3,7 +3,7 @@ const knex = require('knex')
 const { makeUsersArray, cleanTables, seedUsers } = require('./test-helpers');
 const app = require('../src/app');
 
-describe.only('User endpoint', function() {
+describe('User endpoint', function() {
   let db 
 
   const  testUsers = makeUsersArray();
