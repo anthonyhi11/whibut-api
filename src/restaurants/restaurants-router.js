@@ -53,6 +53,41 @@ restaurantsRouter
           .location(path.posix.join(req.originalUrl, `/${restaurant.id}`))
           .json(serializeRestaurant(restaurant))
       })
+      .catch(next);
   })
+
+  restaurantsRouter
+    .route('/:restId')
+    .all(requireAuth, (req, res, next) => {
+      RestaurantsService.getById(
+        req.app.get('db'),
+        req.params.restId,
+        req.user.id
+      )
+      .then(rest => {
+        if (!rest) {
+          res.status(404).json({
+            error: `Restaurant not found!`
+          })
+        }
+        res.rest = rest;
+        next();
+      })
+    })
+    .get((req, res, next) => {
+      res
+        .status(200)
+        .json(serializeRestaurant(res.rest))
+    })
+    .delete((req, res, next) => {
+      RestaurantsService.deleteRest(
+        req.app.get('db'),
+        req.params.restId
+      )
+      .then(numRowsAffected => {
+        return res.status(204).end();
+      })
+      .catch(next);
+    })
 
   module.exports = restaurantsRouter;

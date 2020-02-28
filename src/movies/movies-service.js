@@ -13,6 +13,19 @@ const MoviesService = {
       .then(rows => {
         return rows[0]
       })
+    },
+    getById(knex, movieId, userId) {
+      return knex
+        .select('*')
+        .from('whibut_movies')
+        .where('user_id', userId)
+        .where('id', movieId)
+        .first();
+    },
+    deleteMovie(knex, id) {
+      return knex('whibut_movies')
+        .where({ id })
+        .delete();
     }
 }
 

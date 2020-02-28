@@ -54,6 +54,39 @@ moviesRouter
         .json(serializeMovie(movie))
     })
     .catch(next);
-  })
+  });
+
+  moviesRouter
+    .route('/:movieId')
+    .all(requireAuth, (req, res, next) => {
+      MoviesService.getById(
+        req.app.get('db'),
+        req.params.movieId,
+        req.user.id
+      )
+      .then(movie => {
+        if (!movie) {
+          return res.status(404).json({
+            error: `Movie not found!`
+          })
+        }
+        res.movie = movie;
+        next();
+      })
+    })
+    .get((req, res, next) => {
+      res
+        .status(200)
+        .json(serializeMovie(res.movie))
+    })
+    .delete((req, res, next) => {
+      MoviesService.deleteMovie(
+        req.app.get('db'),
+        req.params.movieId
+      )
+      .then(numRowsAffected => {
+        return res.status(204).end();
+      })
+    })
 
   module.exports = moviesRouter;

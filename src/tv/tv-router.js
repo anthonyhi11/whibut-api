@@ -52,6 +52,40 @@ tvRouter
         .location(path.posix.join(req.originalUrl, `${show.id}`))
         .json(serializeTv(show))
     })
-  })
+  });
+
+  tvRouter
+    .route('/:tvId')
+    .all(requireAuth, (req, res, next) => {
+      TvService.getById(
+        req.app.get('db'),
+        req.params.tvId,
+        req.user.id
+      )
+      .then(show => {
+        if (!show) {
+          return res.status(404).json({
+            error: `TV Show not found`
+          })
+        } 
+        res.show = show;
+        next();
+      })
+    })
+    .get((req, res, next) => {
+      res
+        .status(200)
+        .json(serializeTv(res.show))
+    })
+    .delete((req, res, next) => {
+      TvService.deleteTv(
+        req.app.get('db'),
+        req.params.tvId
+      )
+      .then(numRowsAffected => {
+        return res.status(204).end();
+      })
+      .catch(next);
+    })
 
   module.exports = tvRouter;
