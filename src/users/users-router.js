@@ -60,11 +60,11 @@ usersRouter
   })
 
   usersRouter
-    .route('/:userId')
+    .route('/settings')
     .all(requireAuth, (req, res, next) => {
       UsersService.getById(
         req.app.get('db'),
-        req.params.userId,
+        req.user.id,
         req.user.id
       )
       .then(user => {
@@ -120,11 +120,9 @@ usersRouter
             req.app.get('db'),
             req.user.id,
             updatedUser)
-            .then(user => {
-              res
-              .status(204)
-              .location(path.posix.join(req.originalUrl, `${user.id}`))
-              .json(UsersService.serializeUser(res.user))
+            .then(res => {
+              return res
+              .status(201).end()
     })
   })
 })
