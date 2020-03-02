@@ -189,4 +189,8 @@ describe('User endpoint', function() {
       })
     })
   })
+describe('PATCH /api/users', {
+
+  
+})
 })

@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { makeUsersArray, cleanTables, seedUsers } = require('./test-helpers');
 const app = require('../src/app');
 
-describe.only(`Login Endpoints`, () => {
+describe(`Login Endpoints`, () => {
   let db 
 const testUsers = makeUsersArray();
 const testUser = testUsers[0];
@@ -76,7 +76,7 @@ const testUser = testUsers[0];
     it('responds with 200 and JWT auth token when valid', () => {
       const userValidCreds = {
         username: testUser.username,
-        password: testUser.password,
+        password: testUser.password
       }
       const expectedToken = jwt.sign(
         { user_id: testUser.id },
