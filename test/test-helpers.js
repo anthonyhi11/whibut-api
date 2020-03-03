@@ -79,6 +79,80 @@ function seedBooks(db, books) {
     .insert(books)
 }
 
+function makeMoviesArray() {
+  return [
+    { 'id': 1,
+      'user_id': 1,
+      "activity": 'Movies',
+      "title": 'parasite',
+      "genre": "thriller",
+      "rating": 10,
+      "comments": "Wonderful film. Had us questioning the disparity between classes. Subtitled "
+    },
+    { 'id': 2,
+      'user_id': 1,
+      "activity": 'Movies',
+      "title": 'Ad Astra',
+      "genre": 'Sci-Fi',
+      "rating": 6,
+      "comments": "Started out with an interesting world in the future with an A-List leading man. The movie fizzled with bad character writing"
+    },
+  ]
+}
+
+function seedMovies(db, movies) {
+  return db
+    .into('whibut_movies')
+    .insert(movies)
+}
+
+function makeTvArray() {
+  return [
+    { 'id': 1,
+      'activity': 'TV',
+      'title': 'The Outsider',
+      'genre': 'Horror',
+      "network": "HBO",
+      "rating": 8,
+      "comments": "Stephen King keeps trying to keep me scared. A mix of crime and supernatural keeps you on your feet and checking your locks before bed."
+    },
+    { 'id': 2,
+      'activity': 'TV',
+      'title': 'The Bachelor',
+      'genre': 'Reality',
+      "network": "ABC",
+      "rating": 5,
+      "comments": "Only worth watching for a few episodes as the show drags on and barely kept afloat by the meddlesome producers"
+    }
+  ]
+}
+
+function seedShows(db, shows) {
+  return db
+    .into('whibut_tv')
+    .insert(shows)
+}
+
+function makeRestArray() {
+  return [
+    {   
+      'id': 1,
+      'activity': 'Restaurants',
+      'restaurant_name': "Popeye's",
+      'restaurant_type': 'Fast-food',
+      'website': 'N/A',
+      'rating': 7,
+      'comments': "Can be a bit pricey, but definitely one of the better options when it comes to fast chicken"
+    }
+  ]
+}
+
+function seedRests(db, rests) {
+  return db
+    .into('whibut_restaurants')
+    .insert(rests)
+}
+
 function cleanTables(db) {
   return db.transaction(trx =>
     trx.raw(
@@ -120,5 +194,11 @@ module.exports = {
   cleanTables,
   seedBooks,
   makeBooksArray,
-  createJwt
+  createJwt,
+  makeMoviesArray,
+  seedMovies,
+  makeTvArray,
+  seedShows,
+  makeRestArray,
+  seedRests
 }

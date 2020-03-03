@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const knex = require('knex')
-const { makeUsersArray, cleanTables, seedUsers } = require('./test-helpers');
+const { makeUsersArray, cleanTables, seedUsers, createJwt } = require('./test-helpers');
 const app = require('../src/app');
 
 describe('User endpoint', function() {
@@ -23,7 +23,7 @@ describe('User endpoint', function() {
 
   before('cleanup', () => cleanTables(db));
 
-  // afterEach('cleanup', () => cleanTables(db));
+  afterEach('cleanup', () => cleanTables(db));
 
   
   describe('POST /api/users', () => {
