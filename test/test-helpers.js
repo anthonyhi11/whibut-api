@@ -1,23 +1,26 @@
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken')
+const config = require('../src/config')
 
 function makeUsersArray() {
   return [
     {
-      id: 1, 
-      username: 'test-user1',
-      password:'password',
+      id: 1,
+      username: 'testuser1',
+      password:'Password123!',
+      date_created: new Date('2029-01-22T16:28:32.615Z'),
+      date_modified: new Date('2029-01-22T16:28:32.615Z'),
+    },
+    {
+      id: 2,
+      username: 'testuser2',
+      password:'Password123!',
       date_created: new Date('2029-01-22T16:28:32.615Z'),
     },
     {
-      id: 2, 
-      username: 'test-user2',
-      password:'password',
-      date_created: new Date('2029-01-22T16:28:32.615Z'),
-    },
-    {
-      id: 3, 
-      username: 'test-user3',
-      password:'password',
+      id: 3,
+      username: 'testuser3',
+      password:'Password123!',
       date_created: new Date('2029-01-22T16:28:32.615Z'),
     },
   ]
@@ -35,6 +38,45 @@ function seedUsers(db, users) {
         [users[users.length - 1].id],
       )
     )
+}
+
+function makeBooksArray() {
+  return [
+    {
+      id: 1,
+      user_id: 1,
+      activity: 'books',
+      title: 'Example',
+      author: 'Example',
+      genre: 'example',
+      rating: 4,
+      comments: 'example'
+    },
+    { id: 2,
+      user_id: 1,
+      activity: 'books',
+      title: 'Example2',
+      author: 'Example',
+      genre: 'example',
+      rating: 4,
+      comments: 'example'
+    },
+    { id: 3,
+      user_id: 1,
+      activity: 'books',
+      title: 'Example3',
+      author: 'Example',
+      genre: 'example',
+      rating: 4,
+      comments: 'example'
+    }
+  ]
+}
+
+function seedBooks(db, books) {
+  return db
+    .into('whibut_books')
+    .insert(books)
 }
 
 function cleanTables(db) {
@@ -65,8 +107,18 @@ function cleanTables(db) {
   )
 }
 
+function createJwt(subject, payload) {
+  return jwt.sign(payload, config.JWT_SECRET, {
+    subject,
+    algorithm: 'HS256',
+  })
+}
+
 module.exports = {
   makeUsersArray,
   seedUsers, 
-  cleanTables
+  cleanTables,
+  seedBooks,
+  makeBooksArray,
+  createJwt
 }

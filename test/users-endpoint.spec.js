@@ -9,6 +9,8 @@ describe('User endpoint', function() {
   const  testUsers = makeUsersArray();
   const testUser = testUsers[0]
 
+
+
   before('make knex instance', () => {
     db = knex({
       client: 'pg',
@@ -21,8 +23,9 @@ describe('User endpoint', function() {
 
   before('cleanup', () => cleanTables(db));
 
-  afterEach('cleanup', () => cleanTables(db));
+  // afterEach('cleanup', () => cleanTables(db));
 
+  
   describe('POST /api/users', () => {
     context('user validation', () => {
       this.beforeEach('insert users', () =>
@@ -189,8 +192,7 @@ describe('User endpoint', function() {
       })
     })
   })
-describe('PATCH /api/users', {
 
   
 })
-})
+
