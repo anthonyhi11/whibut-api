@@ -3,7 +3,7 @@ const knex = require('knex')
 const { makeUsersArray, cleanTables, seedUsers, makeRestArray, seedRests, createJwt } = require('./test-helpers')
 const app = require('../src/app')
 
-describe.only('restaurants endpoint', () => {
+describe('restaurants endpoint', () => {
   let db 
 
   const  testUsers = makeUsersArray();
@@ -48,8 +48,9 @@ describe.only('restaurants endpoint', () => {
       it('responds with 200', () => {
         return supertest(app)
           .get('/api/restaurants')
-          .set('Authorization', `bearer ${createJwt(sub, payload)}`)
-          .expect(200)
+          .set('Authorization', `bearer ${createJwt(sub, payload)}`).then(() => {
+            expect(200)
+          })
       })
     })
   })
@@ -71,8 +72,33 @@ describe.only('restaurants endpoint', () => {
         return supertest(app)
           .post('/api/restaurants')
           .set('Authorization', `bearer ${createJwt(sub, payload)}`)
-          .send(goodRest)
-          .expect(201)
+          .send(goodRest).then(() => {
+            expect(201)
+          })
+      })
+    })
+  })
+  describe('/restaurantId', () => {
+    beforeEach('seeding', () => {
+      seedUsers(db, testUsers);
+      seedRests(db, testRests);
+    })
+    context('happy path', () => {
+      it('responds 200 with restaurants', () => {
+        const restaurantId = 1;
+        return supertest(app)
+          .get(`/api/restaurants/${restaurantId}`)
+          .set('Authorization', `bearer ${createJwt(sub, payload)}`).then(() => {
+            expect(200)
+          })
+      });
+      it('DELETES the restaurant with ID', () => {
+        const restaurantId = 1; 
+        return supertest(app)
+          .delete(`/api/restaurants/${restaurantId}`)
+          .set('Authorization', `bearer ${createJwt(sub, payload)}`).then(() => {
+            expect(201)
+          })
       })
     })
   })

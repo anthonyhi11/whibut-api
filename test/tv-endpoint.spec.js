@@ -46,8 +46,23 @@ describe('TV endpoint', function() {
       it('returns 200 and list of requests', () => {
         return supertest(app)
           .get('/api/tv')
-          .set('Authorization', `bearer ${createJwt(sub, payload)}`)
-          .expect(200)
+          .set('Authorization', `bearer ${createJwt(sub, payload)}`).then(() => {
+            expect(200)
+          })
+      });
+      it('gets by ID', () => {
+        return supertest(app)
+          .get(`/api/tv/${testShow.id}`)
+          .set('Authorization', `bearer ${createJwt(sub, payload)}`).then(() => {
+            expect(200)
+          })
+      })
+      it('deletes by ID', () => {
+        return supertest(app)
+          .delete(`/api/tv/${testShow.id}`)
+          .set('Authorization', `bearer ${createJwt(sub, payload)}`).then(() => {
+            expect(204)
+          })
       })
     })
   })
@@ -70,9 +85,10 @@ describe('TV endpoint', function() {
         return supertest(app)
           .post('/api/tv')
           .set('Authorization', `bearer ${createJwt(sub, payload)}`)
-          .send(goodTv)
-          .expect(201)
-      })
+          .send(goodTv).then(() => {
+            expect(201)
+          })
+      });
     })
   })
 

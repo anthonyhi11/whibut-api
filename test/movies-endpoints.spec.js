@@ -43,15 +43,24 @@ describe('movies endpoint', function() {
       it('returns 200', () => {
         return supertest(app)
           .get('/api/movies')
-          .set('Authorization', `bearer ${createJwt(sub, payload)}`)
-          .expect(200)
+          .set('Authorization', `bearer ${createJwt(sub, payload)}`).then(() => {
+            expect(200)
+          })
       })
-      // it('returns 200 with bookid', () => {
-      //   return supertest(app)
-      //     .get(`/api/movies/${testMovie.id}`)
-      //     .set('Authorization', `bearer ${createJwt(sub, payload)}`)
-      //     .expect(200)
-      // })
+      it('returns 200 with MovieId', () => {
+        return supertest(app)
+          .get(`/api/movies/${testMovie.id}`)
+          .set('Authorization', `bearer ${createJwt(sub, payload)}`).then(() => {
+            expect(200)
+          })
+      })
+      it('DELETES movie with ID', () => {
+        return supertest(app)
+          .delete(`/api/movies/${testMovie.id}`)
+          .set('Authorization', `bearer ${createJwt(sub, payload)}`).then(() => {
+            expect(201);
+          })
+      })
     })
     context('POST', () => {
       beforeEach('seeds', () => seedUsers(db, testUsers))
@@ -67,8 +76,9 @@ describe('movies endpoint', function() {
         return supertest(app)
           .post('/api/movies')
           .set('Authorization', `bearer ${createJwt(sub, payload)}`)
-          .send(newMovie)
-          .expect(201)
+          .send(newMovie).then(() => {
+            expect(201)
+          })
       })
     })
   })

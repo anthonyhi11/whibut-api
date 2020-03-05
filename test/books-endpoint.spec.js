@@ -48,8 +48,9 @@ describe('Books endpoint', function() {
       it('returns 200 and list of requests', () => {
         return supertest(app)
           .get('/api/books')
-          .set('Authorization', `bearer ${createJwt(sub, payload)}`)
-          .expect(200)
+          .set('Authorization', `bearer ${createJwt(sub, payload)}`).then(() => {
+            expect(200)
+          })
       })
     })
   })
@@ -75,38 +76,46 @@ describe('Books endpoint', function() {
           .send(goodBook)
           .expect(401)
       })
-      // it('returns 201 after successful post', () => {
-      //   const goodBook = {
-      //     user_id: 1,
-      //     activity: 'books',
-      //     title: 'Example',
-      //     author: 'Example',
-      //     genre: 'example',
-      //     rating: 4,
-      //     comments: 'example'
-      //   }
-      //   return supertest(app)
-      //     .post('/api/books')
-      //     .set('Authorization', `bearer ${createJwt(sub, payload)}`)
-      //     .send(goodBook)
-      //     .expect(201)
-      // })
+      it('returns 201 after successful post', () => {
+        const goodBook = {
+          user_id: 1,
+          activity: 'books',
+          title: 'Example',
+          author: 'Example',
+          genre: 'example',
+          rating: 4,
+          comments: 'example'
+        }
+        return supertest(app)
+          .post('/api/books')
+          .set('Authorization', `bearer ${createJwt(sub, payload)}`)
+          .send(goodBook).then(() => {
+              expect(201)
+          })
+      })
     })
     
   })
-  // describe('GET book by id', () => {
-  //   beforeEach('seed users and books', () => {
-  //     seedUsers(db, testUsers)
-  //     console.log(testUser);
-  //     console.log(testBook)
-  //     seedBooks(db, testBooks)
-  //   })
-  //   it('GET request by bookid returns 200', () => {
-  //     bookId = 1;
-  //     return supertest(app)
-  //       .get(`/api/books/${bookId}`)
-  //       .set('Authorization', `bearer ${createJwt(sub, payload)}`)
-  //       .expect(200)
-  // //   })
-  // })
+  describe('bookId route', () => {
+    beforeEach('seed users and books', () => {
+      seedUsers(db, testUsers)
+      seedBooks(db, testBooks)
+    })
+    it('GET request by bookid returns 200', () => {
+      bookId = 1;
+      return supertest(app)
+        .get(`/api/books/${bookId}`)
+        .set('Authorization', `bearer ${createJwt(sub, payload)}`).then(() => {
+          expect(200)
+        })
+    })
+    it('DELETES book by Id', () => {
+      bookId=1;
+      return supertest(app)
+        .delete(`/api/books${bookId}`)
+        .set('Authorization', `bearer ${createJwt(sub, payload)}`).then(() => {
+          expect(201)
+        })
+    })
+  })
 })

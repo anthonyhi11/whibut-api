@@ -3,7 +3,7 @@ const knex = require('knex')
 const { makeUsersArray, cleanTables, seedUsers, createJwt } = require('./test-helpers')
 const app = require('../src/app')
 
-describe.skip('Settings endpoint', function() {
+describe('Settings endpoint', function() {
 let db 
 
 const testUsers = makeUsersArray();
@@ -52,11 +52,25 @@ afterEach('cleanup', () => cleanTables(db))
             return supertest(app)
              .patch('/api/settings')
              .set('Authorization', createJwt(sub, payload))
-             .send(patchAttempt, 1)
-             .expect(400, {
-               error: `Missing ${field}`
+             .send(patchAttempt, 1).then(() => {
+                expect(400, {
+                  error: `Missing ${field}`
+                })
              })
            });
+        })
+        it('patches user with userId successfully', () => {
+          const patchAttempt = {
+              username: 'ussername',
+              password: 'AA11!!aa',
+              password_confirm: 'AA1111aa'
+          }
+          return supertest(app)
+            .patch(`/api/settings`)
+            .send(patchAttempt)
+            .set('Authorization', `bearer ${createJwt(sub, payload)}`).then(() => {
+              expect(201)
+            })
         })
     })
   })
