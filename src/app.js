@@ -30,10 +30,6 @@ const morganOption = (NODE_ENV === 'production')
   app.use('/api/users', usersRouter);
   app.use('/api/login', loginRouter);
 
-  app.get('/', (req, res) => {
-    res.send('Hello, world!')
-  })
-
   app.use(function errorHandler(error, req, res, next) {
     let response
     if (NODE_ENV === 'production') {
