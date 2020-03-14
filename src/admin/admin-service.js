@@ -10,6 +10,24 @@ const AdminService = {
     return knex
       .select('*')
       .from('whibut_movies')
+  },
+
+  getAllBooks(knex) {
+    return knex
+      .select('*')
+      .from('whibut_books')
+  },
+
+  getAllTv(knex) {
+    return knex
+      .select('*')
+      .from('whibut_tv')
+  },
+
+  getAllRest(knex) {
+    return knex
+      .select('*')
+      .from('whibut_restaurants')
   }
 }
 
