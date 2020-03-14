@@ -10,6 +10,7 @@ const tvRouter = require('./tv/tv-router');
 const restaurantsRouter = require('./restaurants/restaurants-router');
 const usersRouter = require('./users/users-router');
 const loginRouter = require('./login/login-router');
+const adminRouter = require('./admin/admin-router');
 const app = express();
 
 
@@ -29,6 +30,7 @@ const morganOption = (NODE_ENV === 'production')
   app.use('/api/restaurants', restaurantsRouter);
   app.use('/api/users', usersRouter);
   app.use('/api/login', loginRouter);
+  app.use('/api/admin', adminRouter)
 
   app.use(function errorHandler(error, req, res, next) {
     let response
