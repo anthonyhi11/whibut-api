@@ -9,8 +9,18 @@ const serializeUsers = user => ({
   id: user.id
 })
 
+const serializeMovie = movie => ({
+  id: movie.id,
+  user_id: movie.user_id ,
+  activity: xss(movie.activity),
+  title: xss(movie.title), 
+  genre: xss(movie.genre),
+  rating: movie.rating,
+  comments: xss(movie.comments)
+})
+
 adminRouter
-  .route('/')
+  .route('/users')
   .all(requireAuth)
   .get((req, res, next) => {
     if (req.user.id !== 1) {
@@ -23,6 +33,22 @@ adminRouter
       res.json(users.map(serializeUsers))
     })
     .catch(next)
-  }) 
+  })
+
+  adminRouter
+    .route('/movies')
+    .all(requireAuth)
+    .get((req, res, next) => {
+      if (req.user.id !== 1) {
+        return res.status(400).json({error: 'Unauthorized'})
+      }
+      AdminService.getAllBooks(
+        req.app.get('db')
+      )
+      .then(movies => {
+        res.json(movies.map(serializeMovie))
+      })  
+      .catch(next)
+    })
 
   module.exports = adminRouter;
