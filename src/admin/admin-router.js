@@ -98,36 +98,37 @@ adminRouter
       .catch(next)
     })
 
-    // adminRouter
-    // .route('/tv')
-    // .all(requireAuth)
-    // .get((req, res, next) => {
-    //   if (req.user.id !== 1) {
-    //     return res.status(400).json({error: 'Unauthorized'})
-    //   }
-    //   AdminService.getAllTv(
-    //     req.app.get('db')
-    //   )
-    //   .then(shows => {
-    //     res.json(shows.map(serializeTv))
-    //   })  
-    //   .catch(next)
-    // })
+    adminRouter
+    .route('/tv')
+    .all(requireAuth)
+    .get((req, res, next) => {
+      if (req.user.id !== 1) {
+        return res.status(400).json({error: 'Unauthorized'})
+      }
+      AdminService.getAllTv(
+        req.app.get('db')
+      )
+      .then(shows => {
+        res.json(shows.map(serializeTv))
+      })  
+      .catch(next)
+    })
 
-    // adminRouter('/restaurants')
-    //   .all(requireAuth)
-    //   .get((req, res, next) => {
-    //     if (req.user.id !== 1) {
-    //       return res.status(400).json({ error: 'Unauthorized'})
-    //     }
-    //     AdminService.getAllRest(
-    //       req.app.get('db')
-    //     )
-    //     .then(rests => {
-    //       res.json(rests.map(serializeRestaurant))
-    //     })
-    //     .catch(next)
-    //   })
+    adminRouter
+      .route('/restaurants')
+      .all(requireAuth)
+      .get((req, res, next) => {
+        if (req.user.id !== 1) {
+          return res.status(400).json({ error: 'Unauthorized'})
+        }
+        AdminService.getAllRest(
+          req.app.get('db')
+        )
+        .then(rests => {
+          res.json(rests.map(serializeRestaurant))
+        })
+        .catch(next)
+      })
 
 
 
