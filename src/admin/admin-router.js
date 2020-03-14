@@ -42,7 +42,7 @@ adminRouter
       if (req.user.id !== 1) {
         return res.status(400).json({error: 'Unauthorized'})
       }
-      AdminService.getAllBooks(
+      AdminService.getAllMovies(
         req.app.get('db')
       )
       .then(movies => {
