@@ -1,29 +1,30 @@
-# Express Boilerplate!
+# WHIBUT v1.1 - WHAT HAVE I BEEN UP TO?
 
-This is a boilerplate project used for starting new projects!
+This is the API for the WHIBUT-CLIENT. 
+Live Client: whibut-client.now.sh.
+CLIENT REPO: https://github.com/anthonyhi11/whibut-client
 
-## Set up
+## ENDPOINTS
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+Users can...
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+1. Add reviews of various activities
+2. View those activities
+3. Delete their activities
 
-## Scripts
+## TECH USED
 
-Start the application `npm start`
+Built using Node, Express, PostgreSQL. 
 
-Start nodemon for the application `npm run dev`
+## COMING SOON
 
-Run the tests `npm test`
+### v1.2
 
-## Deploying
+1. EDIT posts
+2. Miscellaneous category
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+### v1.3
 
-## Seeding 
-psql -d <name of database> -f <name of file>
+1. Search ability from home screen
+2. Filtering posts
+
