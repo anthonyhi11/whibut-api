@@ -22,33 +22,33 @@ CLIENT REPO: https://github.com/anthonyhi11/whibut-client
 ## ENDPOINTS
 
 ### /api/books 
-POST -- creates a new book and inserts into table
-GET -- gets books associated with user
-DELETE -- Deletes book record from table
+- POST -- creates a new book and inserts into table
+- GET -- gets books associated with user
+- DELETE -- Deletes book record from table
 
 ### /api/movies
-POST -- creates a new movie and inserts into table
-GET -- gets movies associated with user
-DELETE -- Deletes movie record from table
+- POST -- creates a new movie and inserts into table
+- GET -- gets movies associated with user
+- DELETE -- Deletes movie record from table
 
 ### /api/tv
-POST -- creates a new tv show and inserts into table
-GET -- gets tv shows associated with user
-DELETE -- Deletes tv record from table
+- POST -- creates a new tv show and inserts into table
+- GET -- gets tv shows associated with user
+- DELETE -- Deletes tv record from table
 
 ### /api/restaurants
-POST -- creates a new restaurant and inserts into table
-GET -- gets restaurants associated with user
-DELETE -- Deletes restaurant record from table
+- POST -- creates a new restaurant and inserts into table
+- GET -- gets restaurants associated with user
+- DELETE -- Deletes restaurant record from table
 
 ### /api/users
-POST -- creates a new user
+- POST -- creates a new user
 
 ##### /settings
-PATCH -- updates the user info
+- PATCH -- updates the user info
 
 ### /api/login
-POST -- Logs the user in
+- POST -- Logs the user in
 
 ## TECH USED
 
